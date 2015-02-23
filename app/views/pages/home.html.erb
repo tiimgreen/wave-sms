@@ -1,2 +1,152 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div id="hero">
+  <div class="container">
+    <h1 class="hero-text animated fadeInDown">
+      Create Your Own
+      <br/>
+      SMS Contact Numbers
+    </h1>
+    <p class="sub-text animated fadeInDown">
+      Create a simple, elegant contact process that accepts payments in an instant.
+    </p>
+    <div class="cta animated fadeInDown">
+      <%= link_to 'See the tour', '#', class: 'button-outline' %>
+      <%= link_to 'Sign up for a free trial', new_user_registration_path, class: 'button' %>
+    </div>
+    <div class="img"></div>
+  </div>
+</div>
+<div id="features">
+  <div class="container">
+    <div class="row header">
+      <div class="col-md-12">
+        <h2>Autonomous, affordable, revolutionary.</h2>
+        <p>Kodets is a subscription based, online platform designed for primary and secondary schools to assist in the teaching of Computing.</p>
+      </div>
+    </div>
+    <div class="row feature">
+      <div class="col-md-6 info">
+        <h4>Customise all lessons to your requirements</h4>
+        <p>
+          With Kodets' custom built Lesson Editor you can easily change and update any lessons content or requirements.
+        </p>
+      </div>
+      <div class="col-md-6 image">
+        <%= image_tag 'feature1.png', class: 'img-responsive' %>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row feature backwards">
+      <div class="col-md-6 info">
+        <h4>A secure learning area for students to learn collaboratively.</h4>
+        <p>
+          Kodets offers a fully featured learning environment with multiple social features to allows students to go through the learning process together.
+        </p>
+        <p>
+          Leaderboards, groups, sharing code and collaborative competitions are just some of these features.
+        </p>
+      </div>
+      <div class="col-md-6 image">
+        <%= image_tag 'feature2.png', class: 'img-responsive' %>
+      </div>
+    </div>
+    <div class="divider"></div>
+    <div class="row feature">
+      <div class="col-md-6 info">
+        <h4>1,000's of lessons instantly available</h4>
+        <p>Kodets provides an easy to use, hassle free interface to allow you to easily and quickly set homework or classwork tasks.</p>
+      </div>
+      <div class="col-md-6 image">
+        <%= image_tag 'feature1.png', class: 'img-responsive' %>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="slider">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12 slide-wrapper">
+        <div class="slideshow">
+          <div class="btn-nav prev"></div>
+          <div class="btn-nav next"></div>
+          <div class="slide active">
+            <%= image_tag 'slider/slide3.png' %>
+          </div>
+          <div class="slide">
+            <%= image_tag 'slider/slide4.png' %>
+          </div>
+          <div class="slide">
+            <%= image_tag 'slider/slide1.png' %>
+          </div>
+          <div class="slide">
+            <%= image_tag 'slider/slide5.png' %>
+          </div>
+          <div class="slide">
+            <%= image_tag 'slider/slide2.png' %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="testimonials">
+  <div class="container">
+    <div class="row header">
+      <div class="col-md-12">
+        <h3>Trusted by a lot businesses around the world:</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="testimonial pull-right">
+          <div class="quote">
+            I am just quoting some stuff but I am seriously happy about this product. Has a lot of powerful
+            features and is so easy to set up, I could stay customizing it day and night, it's just so much fun!
+            <div class="arrow-down">
+              <div class="arrow"></div>
+              <div class="arrow-border"></div>
+            </div>
+          </div>
+          <div class="author">
+            <%= image_tag 'testimonials/testimonial1.jpg', class: 'pic' %>
+            <div class="name">John McClane</div>
+            <div class="company">Horsforth School</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="testimonial">
+          <div class="quote">
+            This thing is one of those tools that everybody should be using. I really like it and with this ease to use, you can kickstart your teachgin and apps and just focus on your students!
+            <div class="arrow-down">
+              <div class="arrow"></div>
+              <div class="arrow-border"></div>
+            </div>
+          </div>
+          <div class="author">
+            <%= image_tag 'testimonials/testimonial2.jpg', class: 'pic' %>
+            <div class="name">Karen Jones</div>
+            <div class="company">Horsforth School</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id="cta">
+  <p>
+    Start your free 14 day trial!
+  </p>
+  <%= link_to 'Sign up for free', '#' %>
+</div>
+<div id="clients">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>Our Customers</h3>
+        <p>
+          These are some of our customers who have helped us by using our product.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

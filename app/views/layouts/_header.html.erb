@@ -6,16 +6,16 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to 'Splash', root_path, class: 'navbar-brand' %>
+      <%= link_to 'Wave SMS', root_path, class: 'navbar-brand' %>
     </div>
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
           <li>
-            <%= link_to 'New Splash Page', new_splash_page_path %>
+            <%= link_to 'Create Number', '#' %>
           </li>
           <li>
-            <%= link_to 'My Splash Pages', splash_pages_path %>
+            <%= link_to 'My Numbers', '#' %>
           </li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">

@@ -2,12 +2,28 @@
 <html>
 <head>
   <title><%= page_title @page_title %></title>
-  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+
   <%= csrf_meta_tags %>
 </head>
-<body>
+<body class="<%= controller.controller_name %> <%= controller.action_name %>">
+
+<% flash.each do |key, value| %>
+  <div class="alert alert-<%= key %> alert-dissmissable" role="alert">
+    <button class="close" data-dismiss="alert" type="button">
+      <span aria-hidden="true">&times;</span>
+      <span class="sr-only">Close</span>
+    </button>
+    <%= value %>
+  </div>
+<% end %>
+
+<%= render 'layouts/header' %>
 
 <%= yield %>
+
+<%= render 'layouts/footer' %>
 
 <%= javascript_include_tag 'application' %>
 

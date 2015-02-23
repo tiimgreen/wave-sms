@@ -1,2 +1,43 @@
-<h1>Dashboard#index</h1>
-<p>Find me in app/views/dashboard/index.html.erb</p>
+<div id="info">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          You don't have any numbers yet,
+          <%= link_to 'click here to add one.', '#', class: 'alert-link' %>
+        </div>
+        <h1>Dashboard</h1>
+      </div>
+    </div>
+    <div class="row stats">
+      <%= link_to '#' do %>
+        <div class="col-sm-4">
+          <strong>
+            10
+          </strong>
+          in your organisation
+        </div>
+      <% end %>
+      <%= link_to '#' do %>
+        <div class="col-sm-4">
+          <strong>
+            10
+          </strong>
+          in your organisation
+        </div>
+      <% end %>
+      <%= link_to '#' do %>
+        <div class="col-sm-4">
+          <strong>
+            10
+          </strong>
+          in your organisation
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

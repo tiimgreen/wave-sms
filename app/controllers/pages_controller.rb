@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_action :dashboard_redirect
+
   def home
   end
 
@@ -10,4 +12,10 @@ class PagesController < ApplicationController
 
   def contact
   end
+
+  private
+
+    def dashboard_redirect
+      redirect_to dashboard_path if user_signed_in?
+    end
 end

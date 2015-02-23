@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
-  before_action :set_title, :dashboard_redirect
+  before_action :set_title
 
   private
 
@@ -18,9 +18,5 @@ class ApplicationController < ActionController::Base
       else
         @page_title = params[:action].titleize
       end
-    end
-
-    def dashboard_redirect
-      redirect_to dashboard_path if user_signed_in?
     end
 end

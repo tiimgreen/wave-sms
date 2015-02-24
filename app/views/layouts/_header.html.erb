@@ -11,12 +11,8 @@
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li>
-            <%= link_to 'Create Number', '#' %>
-          </li>
-          <li>
-            <%= link_to 'My Numbers', '#' %>
-          </li>
+          <li><%= link_to 'Create Number', '#' %></li>
+          <li><%= link_to 'My Numbers', '#' %></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <i class="fa fa-user"></i>
@@ -40,21 +36,11 @@
             </ul>
           </li>
         <% else %>
-          <li>
-            <%= link_to 'Home', root_path %>
-          </li>
-          <li>
-            <%= link_to 'Pricing', pricing_path %>
-          </li>
-          <li>
-            <%= link_to 'Features', '#' %>
-          </li>
-          <li>
-            <%= link_to 'Register', new_user_registration_path %>
-          </li>
-          <li>
-            <%= link_to 'Sign in', new_user_session_path, class: 'button' %>
-          </li>
+          <li><%= link_to 'Home', root_path %></li>
+          <li><%= link_to 'Pricing', pricing_path %></li>
+          <li><%= link_to 'Features', '#' %></li>
+          <li><%= link_to 'Register', new_user_registration_path %></li>
+          <li><%= link_to 'Sign in', new_user_session_path, class: 'button' %></li>
         <% end %>
       </ul>
     </nav>

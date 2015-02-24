@@ -9,35 +9,28 @@
   <%= csrf_meta_tags %>
 </head>
 <body class="<%= controller.controller_name %> <%= controller.action_name %>">
-  <% if notice %>
-    <div class="alert alert-notice alert-dissmissable alert-no-margin" role="alert">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %> alert-dissmissable" role="alert">
       <button class="close" data-dismiss="alert" type="button">
         <span aria-hidden="true">&times;</span>
         <span class="sr-only">Close</span>
       </button>
-      <%= notice %>
+      <%= value %>
     </div>
   <% end %>
-  <% if alert %>
-    <div class="alert alert-alert alert-dissmissable alert-no-margin" role="alert">
-      <button class="close" data-dismiss="alert" type="button">
-        <span aria-hidden="true">&times;</span>
-        <span class="sr-only">Close</span>
-      </button>
-      <%= alert %>
-    </div>
-  <% end %>
+
   <%= render 'layouts/header' %>
+
   <div class="container">
     <div class="row header">
       <div class="col-md-12">
-        <h4>
-          <%= yield :title %>
-        </h4>
+        <h4><%= @page_title %></h4>
       </div>
     </div>
+
     <div class="row">
       <div class="col-md-12">
+
         <div class="wrapper clearfix">
           <div class="formy">
             <div class="row">
@@ -47,13 +40,17 @@
             </div>
           </div>
         </div>
+
         <% unless on_page 'organisations', 'edit' %>
           <div class="already-account">
             <%= render "devise/shared/links" %>
           </div>
         <% end %>
+
       </div>
     </div>
   </div>
+
+  <%= javascript_include_tag 'application' %>
 </body>
 </html>

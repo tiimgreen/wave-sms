@@ -11,8 +11,8 @@
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
-          <li><%= link_to 'Create Number', '#' %></li>
-          <li><%= link_to 'My Numbers', '#' %></li>
+          <li><%= link_to 'Customers', '#' %></li>
+          <li><%= link_to 'Staff', '#' %></li>
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <i class="fa fa-user"></i>
@@ -22,8 +22,14 @@
             <ul class="dropdown-menu">
               <li>
                 <%= link_to edit_user_registration_path do %>
-                  <span class="octicon octicon-cloud-upload fa-fw"></span>
+                  <i class="fa fa-cog fa-fw"></i>
                   My Account
+                <% end %>
+              </li>
+              <li>
+                <%= link_to edit_user_registration_path do %>
+                  <i class="fa fa-pencil fa-fw"></i>
+                  Organisation Settings
                 <% end %>
               </li>
               <hr/>

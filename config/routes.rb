@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-
-
   devise_for :users,
     controllers: { registrations: 'registrations' },
     path: '',
@@ -16,4 +14,7 @@ Rails.application.routes.draw do
 
   # Dashboard
   get 'dashboard', to: 'dashboard#index'
+
+  # Organisation
+  resources :organisations, only: %w( edit show update )
 end

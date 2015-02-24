@@ -10,7 +10,7 @@
           You don't have any numbers yet,
           <%= link_to 'click here to add one.', '#', class: 'alert-link' %>
         </div>
-        <h1>Dashboard</h1>
+        <h1><%= current_user.organisation.name %> Dashboard</h1>
       </div>
     </div>
     <div class="row stats">

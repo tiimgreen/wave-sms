@@ -5,4 +5,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   belongs_to :organisation
+
+  def owner?(org)
+    org.owner == self
+  end
 end

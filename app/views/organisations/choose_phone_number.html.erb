@@ -1,0 +1,24 @@
+<div id="info">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h1>Choose Phone Number</h1>
+
+        <% if @numbers.present? %>
+
+          <%= form_tag do %>
+
+            <% @numbers.each_with_index do |num, i| %>
+              <label for="number_<%= i %>">
+                <input type="radio" value="<%= num.phone_number %>" name="phone_number" id="number_<%= i %>">
+                <%= format_number(num.phone_number, params[:area_code] || current_org.area_code) %>
+              </label><br>
+            <% end %>
+          <% end %>
+        <% else %>
+          <p class="center soft-top-20">There are no numbers available with your area code, either <%= link_to 'change your area code', edit_organisation_path(current_org) %> or <%= link_to 'look at randomly generated numbers', organisation_choose_phone_number_path(current_org, area_code: 'none') %>.</p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

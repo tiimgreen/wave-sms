@@ -22,6 +22,26 @@ class OrganisationsController < ApplicationController
     end
   end
 
+  def choose_phone_number
+    @org = Organisation.find(params[:organisation_id])
+
+    @client = Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
+
+    if params[:area_code] == 'none'
+      @numbers = @client.available_phone_numbers.get('GB').local.list
+    else
+      @area_code = twilio_area_code(current_user.organisation.area_code)
+
+      @numbers = @client.available_phone_numbers.get('GB').local.list(contains: @area_code)
+    end
+  end
+
+  def buy_phone_number
+    @client = Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
+
+    @client.incoming_phone_numbers.create(phone_number: params[:phone_number])
+  end
+
   private
 
     def authenticate_org_owner

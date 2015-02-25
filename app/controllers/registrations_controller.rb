@@ -1,10 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
 
-  def new
-    super
-    @page_title = 'Test'
-  end
-
   def create
     redirect_to root_path
 
@@ -33,5 +28,8 @@ class RegistrationsController < Devise::RegistrationsController
       clean_up_passwords resource
       respond_with resource and return
     end
+  end
+
+  def create_twilio_number
   end
 end

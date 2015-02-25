@@ -2,14 +2,16 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <div class="alert alert-info alert-dismissible" role="alert">
-          <button class="close" data-dismiss="alert" type="button">
-            <span aria-hidden="true">&times;</span>
-            <span class="sr-only">Close</span>
-          </button>
-          You don't have any numbers yet,
-          <%= link_to 'click here to add one.', '#', class: 'alert-link' %>
-        </div>
+        <% if current_user.owner?(current_org) && current_org.phone_number.blank? %>
+          <div class="alert alert-info alert-dismissible" role="alert">
+            <button class="close" data-dismiss="alert" type="button">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+            You don't have a number yet,
+            <%= link_to 'click here to get one.', organisation_choose_phone_number_path(current_org), class: 'alert-link' %>
+          </div>
+        <% end %>
         <h1><%= current_user.organisation.name %> Dashboard</h1>
       </div>
     </div>

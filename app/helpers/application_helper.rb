@@ -13,4 +13,8 @@ module ApplicationHelper
   def page_title(short, long = 'Wave SMS')
     short.present? ? "#{short} | #{long}" : long
   end
+
+  def current_org
+    current_user.organisation
+  end
 end

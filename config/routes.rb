@@ -16,5 +16,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index'
 
   # Organisation
-  resources :organisations, only: %w( edit show update )
+  resources :organisations, only: %w( edit show update ) do
+    get 'choose_phone_number', path: 'choose-phone-number'
+  end
 end

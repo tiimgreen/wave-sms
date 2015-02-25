@@ -1,4 +1,4 @@
-<%- if controller_name != 'sessions' %>
+<%- if controller_name != 'sessions' && !user_signed_in? %>
   <%= link_to "Log in", new_session_path(resource_name) %><br />
 <% end -%>
 

@@ -12,7 +12,14 @@
             <%= link_to 'click here to get one.', organisation_choose_phone_number_path(current_org), class: 'alert-link' %>
           </div>
         <% end %>
-        <h1><%= current_user.organisation.name %> Dashboard</h1>
+        <h1>
+          <%= current_user.organisation.name %> Dashboard
+          <small>
+            <% if (phone_no = current_org.phone_number).present? %>
+              <%= format_number(phone_no, current_org.area_code) %>
+            <% end %>
+          </small>
+        </h1>
       </div>
     </div>
     <div class="row stats">

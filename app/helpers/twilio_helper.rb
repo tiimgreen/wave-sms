@@ -5,11 +5,9 @@ module TwilioHelper
   end
 
   def format_number(number, area_code)
-    if area_code == 'none'
-      number
-    else
-      twilio_code = twilio_area_code(area_code)
-      "#{area_code} #{number.split(twilio_code)[1]}"
-    end
+    return number if area_code == 'none' || area_code.nil?
+
+    twilio_code = twilio_area_code(area_code)
+    "#{area_code} #{number.split(twilio_code)[1]}"
   end
 end

@@ -1,5 +1,6 @@
 class OrganisationsController < ApplicationController
   before_action :authenticate_org_owner, only: :edit
+  before_action :authenticate_has_phone_number, only: [:choose_phone_number, :activate_phone_number]
 
   def index
   end
@@ -40,7 +41,7 @@ class OrganisationsController < ApplicationController
     @org = Organisation.find(params[:organisation_id])
 
     @client = Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
-    @client.incoming_phone_numbers.create(phone_number: params[:phone_number])
+    # @client.incoming_phone_numbers.create(phone_number: params[:phone_number])
 
     @org.update_attributes(phone_number: params[:phone_number])
 
@@ -54,6 +55,15 @@ class OrganisationsController < ApplicationController
 
       unless current_user == @org.owner
         flash[:warning] = 'You need to be the organisation owner to do that.'
+        redirect_to dashboard_path
+      end
+    end
+
+    def authenticate_has_phone_number
+      @org = Organisation.find(params[:organisation_id])
+
+      if @org.phone_number.present?
+        flash[:warning] = 'You already have a phone number.'
         redirect_to dashboard_path
       end
     end

@@ -22,4 +22,6 @@ Rails.application.routes.draw do
   end
 
   resources :customers
+
+  get 'get-sms', to: 'messages#get_sms'
 end

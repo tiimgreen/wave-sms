@@ -41,11 +41,12 @@ class OrganisationsController < ApplicationController
     @org = Organisation.find(params[:organisation_id])
 
     @client = Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
-    # @client.incoming_phone_numbers.create(phone_number: params[:phone_number])
+    @client.incoming_phone_numbers.create(phone_number: params[:phone_number])
 
-    @org.update_attributes(phone_number: params[:phone_number])
-
-    redirect_to dashboard_path
+    if @org.update_attributes(phone_number: params[:phone_number])
+      flash[:success] = 'Phone number activated!'
+      redirect_to dashboard_path
+    end
   end
 
   private

@@ -6,7 +6,7 @@
 
         <% if @numbers.present? %>
 
-          <%= form_tag do %>
+          <%= form_tag organisation_activate_phone_number_path do %>
 
             <% @numbers.each_with_index do |num, i| %>
               <label for="number_<%= i %>">
@@ -14,6 +14,8 @@
                 <%= format_number(num.phone_number, params[:area_code] || current_org.area_code) %>
               </label><br>
             <% end %>
+
+            <%= submit_tag 'Activate', class: 'button' %>
           <% end %>
         <% else %>
           <p class="center soft-top-20">There are no numbers available with your area code, either <%= link_to 'change your area code', edit_organisation_path(current_org) %> or <%= link_to 'look at randomly generated numbers', organisation_choose_phone_number_path(current_org, area_code: 'none') %>.</p>

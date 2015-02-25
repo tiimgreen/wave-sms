@@ -36,10 +36,15 @@ class OrganisationsController < ApplicationController
     end
   end
 
-  def buy_phone_number
-    @client = Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
+  def activate_phone_number
+    @org = Organisation.find(params[:organisation_id])
 
+    @client = Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
     @client.incoming_phone_numbers.create(phone_number: params[:phone_number])
+
+    @org.update_attributes(phone_number: params[:phone_number])
+
+    redirect_to dashboard_path
   end
 
   private

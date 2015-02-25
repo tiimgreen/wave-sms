@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   # Organisation
   resources :organisations, only: %w( edit show update ) do
     get 'choose_phone_number', path: 'choose-phone-number'
+    match 'activate_phone_number', path: 'activate-phone-number', via: :post
   end
 end

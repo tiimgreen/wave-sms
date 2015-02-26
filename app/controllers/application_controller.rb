@@ -3,6 +3,9 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :set_title
+
+  include ApplicationHelper
   include TwilioHelper
 
   layout :layout_by_resource
@@ -10,7 +13,7 @@ class ApplicationController < ActionController::Base
   protected
 
     def set_title
-      unless %w( create update destroy ).include(params[:action].to_s.lowercase)
+      unless %w( create update destroy ).include?(params[:action].to_s.downcase)
 
         case params[:action]
         when 'index'
@@ -19,6 +22,8 @@ class ApplicationController < ActionController::Base
           @page_title = params[:controller].singularize.titleize
         when 'new'
           @page_title = "New #{params[:controller].singularize.titleize}"
+        when 'edit'
+          @page_title = "Edit #{params[:controller].singularize.titleize}"
         else
           @page_title = params[:action].titleize
         end
@@ -30,7 +35,7 @@ class ApplicationController < ActionController::Base
     end
 
     def form_layout?
-      params[:controller] == 'organisations' &&
-      params[:action] == 'edit'
+      (params[:controller] == 'organisations' && params[:action] == 'edit') ||
+      (params[:controller] == 'customers' && (params[:action] == 'new' || params[:action] == 'create'))
     end
 end

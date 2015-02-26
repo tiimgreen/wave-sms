@@ -23,5 +23,5 @@ Rails.application.routes.draw do
 
   resources :customers
 
-  get 'get-sms', to: 'messages#get_sms'
+  match 'get-sms', to: 'messages#get_sms', via: :post
 end

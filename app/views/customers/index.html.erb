@@ -1,2 +1,19 @@
-<h1>Customers#index</h1>
-<p>Find me in app/views/customers/index.html.erb</p>
+<div id="info">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-right">
+          <div class="btn-group">
+            <%= link_to 'Create Customer', new_customer_path, class: 'btn btn-primary' %>
+            <%= link_to 'Other Action', '#', class: 'btn btn-default' %>
+          </div>
+        </div>
+        <h1><%= current_org.name %>'s Customers</h1>
+
+        <% @customers.each do |customer| %>
+          <%= render 'customers/customer', customer: customer %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -30,6 +30,8 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  def create_twilio_number
+  def edit
+    @page_title = 'Edit User'
+    super
   end
 end

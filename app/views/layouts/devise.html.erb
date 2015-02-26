@@ -41,7 +41,7 @@
           </div>
         </div>
 
-        <% unless on_page 'organisations', 'edit' %>
+        <% if devise_controller? %>
           <div class="already-account">
             <%= render "devise/shared/links" %>
           </div>

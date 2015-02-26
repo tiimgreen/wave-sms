@@ -10,23 +10,22 @@
 </head>
 <body class="<%= controller.controller_name %> <%= controller.action_name %>">
 
-<% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %> alert-dissmissable" role="alert">
-    <button class="close" data-dismiss="alert" type="button">
-      <span aria-hidden="true">&times;</span>
-      <span class="sr-only">Close</span>
-    </button>
-    <%= value %>
-  </div>
-<% end %>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %> alert-dissmissable" role="alert">
+      <button class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <%= value %>
+    </div>
+  <% end %>
 
-<%= render 'layouts/header' %>
+  <%= render 'layouts/header' %>
 
-<%= yield %>
+  <%= yield %>
 
-<%= render 'layouts/footer' %>
+  <%= render 'layouts/footer' %>
 
-<%= javascript_include_tag 'application' %>
-
+  <%= javascript_include_tag 'application' %>
 </body>
 </html>

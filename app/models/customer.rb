@@ -9,6 +9,7 @@ class Customer < ActiveRecord::Base
                          uniqueness: { case_sensitive: false }
 
   has_one :chat
+  has_many :messages, as: :sender
 
   def name
     "#{first_name} #{last_name}"

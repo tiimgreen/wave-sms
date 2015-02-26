@@ -1,3 +1,19 @@
 // Place all the styles related to the Customers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.user-info {
+  padding: 30px;
+  background: #eee;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  .address-block {
+
+    .address-line {
+      display: block;
+    }
+  }
+}

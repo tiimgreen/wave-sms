@@ -10,8 +10,13 @@ class Customer < ActiveRecord::Base
 
   has_one :chat
   has_many :messages, as: :sender
+  belongs_to :user, foreign_key: :staff_id
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def address_fields
+    %i( address_line_1 address_line_2 address_line_3 city postal_code country )
   end
 end

@@ -21,7 +21,9 @@ Rails.application.routes.draw do
     match 'activate_phone_number', path: 'activate-phone-number', via: :post
   end
 
-  resources :customers
+  resources :customers do
+    get 'assign_customer', path: 'assign-to/:user_id'
+  end
 
   match 'get-sms', to: 'messages#get_sms', via: :post
 end

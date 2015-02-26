@@ -45,6 +45,19 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:id])
   end
 
+  def assign_customer
+    @customer = Customer.find(params[:customer_id])
+    @user = User.find(params[:user_id])
+
+    if @customer.update_attributes(staff_id: @user.id)
+      flash[:success] = 'User assigned to you.'
+      redirect_to @customer
+    else
+      flash[:warning] = 'Error assigning you to that customer.'
+      redirect_to @customer
+    end
+  end
+
   private
 
     def customer_params

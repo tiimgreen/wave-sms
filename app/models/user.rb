@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
 
   belongs_to :organisation
 
+  has_many :chats
+
   def owner?(org)
     org.owner == self
   end

@@ -8,6 +8,8 @@ class Customer < ActiveRecord::Base
   validates :email,      format: { with: VALID_EMAIL_REGEX },
                          uniqueness: { case_sensitive: false }
 
+  has_one :chat
+
   def name
     "#{first_name} #{last_name}"
   end

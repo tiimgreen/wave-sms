@@ -58,6 +58,15 @@ class CustomersController < ApplicationController
     end
   end
 
+  def close_customer
+    @customer = Customer.find(params[:customer_id])
+
+    if @customer.update_attributes(staff_id: nil)
+      flash[:success] = 'Customer closed.'
+      redirect_to @customer
+    end
+  end
+
   private
 
     def customer_params

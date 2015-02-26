@@ -19,4 +19,12 @@ class Customer < ActiveRecord::Base
   def address_fields
     %i( address_line_1 address_line_2 address_line_3 city postal_code country )
   end
+
+  def is_taken?
+    staff_id.present?
+  end
+
+  def is_taken_by?(other_user)
+    user == other_user
+  end
 end

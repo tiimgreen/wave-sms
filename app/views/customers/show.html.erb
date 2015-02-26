@@ -7,8 +7,8 @@
 
         <% if @customer.address_line_1.present? %>
 
-          <div class="address-block">
-            <h5 class="soft-top-20">Address</h5>
+          <div class="info-block">
+            <h5>Address</h5>
             <% @customer.address_fields.each do |field| %>
               <span class="address-line"><%= @customer[field] %></span>
             <% end %>
@@ -16,10 +16,31 @@
 
         <% end %>
 
-        <%= @customer.user.email %>
-        <div class="btn-group">
-        <%= link_to 'Assign Customer to Me', customer_assign_customer_path(@customer, current_user), class: 'btn btn-primary' %>
-        <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default' %>
+        <% if @customer.is_taken? %>
+          <div class="info-block">
+            Customer is assigned to:
+            <%= @customer.user.name.present? ? @customer.user.name : @customer.user.email %>
+          </div>
+        <% end %>
+
+        <div class="info-block">
+          <div class="btn-group">
+            <% if @customer.is_taken_by?(current_user) %>
+              <%= link_to 'Close Customer', customer_close_customer_path(@customer), class: 'btn btn-danger' %>
+            <% else %>
+              <%= link_to 'Assign Customer to Me', customer_assign_customer_path(@customer, current_user), class: 'btn btn-primary' %>
+            <% end %>
+
+            <% if @customer.is_taken? %>
+              <% if @customer.is_taken_by?(current_user) %>
+                <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default' %>
+              <% else %>
+                <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default', disabled: true %>
+              <% end %>
+            <% else %>
+              <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default' %>
+            <% end %>
+          </div>
         </div>
       </div>
 

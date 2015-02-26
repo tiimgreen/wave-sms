@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
   def owner?(org)
     org.owner == self
   end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
 end

@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   before_action :set_title
+  before_filter :configure_permitted_parameters, if: :devise_controller?
 
   include ApplicationHelper
   include TwilioHelper
@@ -44,4 +45,12 @@ class ApplicationController < ActionController::Base
       (params[:action] == 'new' || params[:action] == 'create' ||
         params[:action] == 'edit' || params[:action] == 'update')
     end
+
+    def configure_permitted_parameters
+    # rubocop:disable Blocks, BlockAlignment, LineLength
+    devise_parameter_sanitizer.for(:account_update) do |u|
+      u.permit(:first_name, :last_name, :email, :password,
+               :password_confirmation, :current_password)
+    end
+  end
 end

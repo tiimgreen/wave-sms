@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   resources :customers do
     get 'assign_customer', path: 'assign-to/:user_id'
+    get 'close_customer', path: 'close'
   end
 
   match 'get-sms', to: 'messages#get_sms', via: :post

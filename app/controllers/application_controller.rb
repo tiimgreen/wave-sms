@@ -35,7 +35,13 @@ class ApplicationController < ActionController::Base
     end
 
     def form_layout?
-      (params[:controller] == 'organisations' && params[:action] == 'edit') ||
-      (params[:controller] == 'customers' && (params[:action] == 'new' || params[:action] == 'create'))
+      prettify_controller_forms('organisations') ||
+      prettify_controller_forms('customers')
+    end
+
+    def prettify_controller_forms(cont)
+      params[:controller] == cont &&
+      (params[:action] == 'new' || params[:action] == 'create' ||
+        params[:action] == 'edit' || params[:action] == 'update')
     end
 end

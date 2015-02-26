@@ -9,7 +9,7 @@ class CustomersController < ApplicationController
 
     if @customer.save
       flash[:success] = 'Customer created'
-      redirect_to customers_path
+      redirect_to customer_path(@customer)
     else
       render :new
     end
@@ -29,6 +29,13 @@ class CustomersController < ApplicationController
 
   def update
     @customer = Customer.find(params[:id])
+
+    if @customer.update_attributes(customer_params)
+      flash[:success] = 'Customer updated'
+      redirect_to customer_path(@customer)
+    else
+      render :edit
+    end
   end
 
   def destroy

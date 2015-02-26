@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150226214118) do
+ActiveRecord::Schema.define(version: 20150226223233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20150226214118) do
     t.string   "sender_type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "chat_id"
   end
 
   add_index "messages", ["sender_type", "sender_id"], name: "index_messages_on_sender_type_and_sender_id", using: :btree

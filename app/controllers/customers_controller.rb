@@ -8,6 +8,7 @@ class CustomersController < ApplicationController
     @customer = current_org.customers.build(customer_params)
 
     if @customer.save
+      @customer.build_chat.save
       flash[:success] = 'Customer created'
       redirect_to customer_path(@customer)
     else
@@ -17,6 +18,8 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+
+    @chat = @customer.chat
   end
 
   def index

@@ -1,2 +1,6 @@
-<h1>Customers#show</h1>
-<p>Find me in app/views/customers/show.html.erb</p>
+<h1><%= @customer.name %></h1>
+
+<% if @customer.chat.messages.any? %>
+<% else %>
+  <p class="center">You this customer has not sent any messages.</p>
+<% end %>

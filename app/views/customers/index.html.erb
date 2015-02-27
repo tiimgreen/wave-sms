@@ -2,6 +2,15 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <div class="alert alert-info alert-dismissible alert-signup-url" role="alert">
+          <button class="close" data-dismiss="alert" type="button">
+            <span aria-hidden="true">&times;</span>
+            <span class="sr-only">Close</span>
+          </button>
+          Your customer signup URL is
+          <%= link_to organisation_new_customer_url(current_org), organisation_new_customer_path(current_org), class: 'alert-link' %>
+        </div>
+
         <div class="pull-right">
           <div class="btn-group">
             <%= link_to 'Create Customer', new_customer_path, class: 'btn btn-primary' %>

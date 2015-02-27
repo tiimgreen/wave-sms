@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     match 'activate_phone_number', path: 'activate-phone-number', via: :post
   end
 
+  get 'new-customer', to: 'organisations#new_customer'
+
   resources :customers do
     get 'assign_customer', path: 'assign-to/:user_id'
     get 'close_customer', path: 'close'

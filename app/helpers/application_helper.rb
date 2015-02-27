@@ -15,6 +15,6 @@ module ApplicationHelper
   end
 
   def current_org
-    current_user.organisation
+    user_signed_in? ? current_user.organisation : nil
   end
 end

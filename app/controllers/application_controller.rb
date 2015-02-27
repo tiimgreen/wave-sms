@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :set_title
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  before_action :set_customers
+  before_action :set_customers, if: :user_signed_in?
 
   include ApplicationHelper
   include TwilioHelper
@@ -33,7 +33,17 @@ class ApplicationController < ActionController::Base
     end
 
     def layout_by_resource
-      devise_controller? || form_layout? ? 'devise' : 'application'
+      if devise_controller? || form_layout?
+        'devise'
+      else
+        if
+          (params[:controller] == 'organisations' && params[:action] == 'new_customer') ||
+          (params[:controller] == 'pages')
+          'application_no_sidebar'
+        else
+          'application'
+        end
+      end
     end
 
     def form_layout?

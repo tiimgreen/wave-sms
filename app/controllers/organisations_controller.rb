@@ -1,4 +1,5 @@
 class OrganisationsController < ApplicationController
+  before_action :authenticate_user!, except: :new_customer
   before_action :authenticate_org_owner, only: :edit
   before_action :authenticate_has_phone_number, only: [:choose_phone_number, :activate_phone_number]
 
@@ -43,6 +44,22 @@ class OrganisationsController < ApplicationController
       flash[:success] = 'Phone number activated!'
       redirect_to dashboard_path
     end
+  end
+
+  # Customer visits to sign up and save card details
+  def new_customer
+    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+  end
+
+  def create_new_customer
+    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+
+    Stripe::Charge.create(
+      amount: 400,
+      currency: "gbp",
+      source: "tok_14mBggEonafcEKzyf3YVUkJw", # obtained with Stripe.js
+      description: "Charge for test@example.com"
+    )
   end
 
   private

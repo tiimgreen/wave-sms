@@ -23,7 +23,7 @@
   <%= render 'layouts/header' %>
 
   <div class="sidebar">
-  <%= render 'layouts/sidebar' %>
+  <%= render 'layouts/sidebar' if user_signed_in? %>
   </div>
 
   <div class="content">

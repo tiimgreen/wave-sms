@@ -35,20 +35,17 @@ class ApplicationController < ActionController::Base
     def layout_by_resource
       if devise_controller? || form_layout?
         'devise'
+      elsif params[:controller] == 'pages'
+        'application_no_sidebar'
       else
-        if
-          (params[:controller] == 'organisations' && params[:action] == 'new_customer') ||
-          (params[:controller] == 'pages')
-          'application_no_sidebar'
-        else
-          'application'
-        end
+        'application'
       end
     end
 
     def form_layout?
       prettify_controller_forms('organisations') ||
-      prettify_controller_forms('customers')
+      prettify_controller_forms('customers') ||
+      params[:controller] == 'organisations' && params[:action] == 'new_customer'
     end
 
     def prettify_controller_forms(cont)
@@ -66,6 +63,10 @@ class ApplicationController < ActionController::Base
     end
 
     def set_customers
-      @customers_sidebar = current_org.customers.select { |c| c.name.present? }
+      @customers_sidebar = current_org.customers
+    end
+
+    def render_404
+      raise ActionController::RoutingError.new('Not Found')
     end
 end

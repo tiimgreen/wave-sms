@@ -17,4 +17,8 @@ module ApplicationHelper
   def current_org
     user_signed_in? ? current_user.organisation : nil
   end
+
+  def on_organisation_branding_page?
+    on_page('organisations', 'new_customer')
+  end
 end

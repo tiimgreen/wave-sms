@@ -15,9 +15,13 @@
     li {
       color: #ecf0f1;
       width: 100%;
-      min-height: 50px;
+      min-height: 40px;
       padding: 10px 0 10px 10px;
       border-bottom: 1px solid black;
+
+      .label {
+        margin-right: 10px;
+      }
 
       .name {
         color: #fff;

@@ -1,6 +1,7 @@
 class CustomersController < ApplicationController
   before_action :authenticate_user!
   before_action :customer_already_taken, only: :assign_customer
+  before_action :customer_belongs_to_organisation, only: [:show, :edit, :update]
 
   def new
     @customer = Customer.new
@@ -20,6 +21,7 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
+    @page_title = @customer.display_details
 
     @chat = @customer.chat
   end
@@ -51,7 +53,7 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @user = User.find(params[:user_id])
 
-    if @customer.update_attributes(staff_id: @user.id)
+    if @customer.update_attributes(staff_id: @user.id, time_of_assignment: Time.now)
       flash[:success] = 'User assigned to you.'
       redirect_to @customer
     else
@@ -63,8 +65,11 @@ class CustomersController < ApplicationController
   def close_customer
     @customer = Customer.find(params[:customer_id])
 
-    if @customer.update_attributes(staff_id: nil)
+    if @customer.update_attributes(staff_id: nil, time_of_closing: Time.now)
       flash[:success] = 'Customer closed.'
+      redirect_to @customer
+    else
+      flash[:warning] = 'Error closing customer.'
       redirect_to @customer
     end
   end
@@ -83,6 +88,12 @@ class CustomersController < ApplicationController
       if (customer = Customer.find(params[:customer_id])).staff_id.present?
         flash[:warning] = "This customer is already taken, please wait for #{customer.user.name} to close them."
         redirect_to customer
+      end
+    end
+
+    def customer_belongs_to_organisation
+      unless Customer.find(params[:id]).organisation_id == current_org.id
+        render_404
       end
     end
 end

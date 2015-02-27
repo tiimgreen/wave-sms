@@ -3,10 +3,11 @@ class Customer < ActiveRecord::Base
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
-  validates :first_name, presence: true, length: { maximum: 50 }
-  validates :last_name,  length: { maximum: 50 }
-  validates :email,      format: { with: VALID_EMAIL_REGEX },
-                         uniqueness: { case_sensitive: false }
+  validates :first_name,   presence: true, length: { maximum: 50 }
+  validates :last_name,    length: { maximum: 50 }
+  validates :email,        format: { with: VALID_EMAIL_REGEX },
+                           uniqueness: { case_sensitive: false }
+  validates :phone_number, presence: true, length: { maximum: 20 }
 
   has_one :chat
   has_many :messages, as: :sender
@@ -14,6 +15,14 @@ class Customer < ActiveRecord::Base
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def display_details
+    name.present? ? name : email
+  end
+
+  def phone_display_details
+    name.present? ? name : phone_number
   end
 
   def address_fields
@@ -26,5 +35,9 @@ class Customer < ActiveRecord::Base
 
   def is_taken_by?(other_user)
     user == other_user
+  end
+
+  def has_unseen_message?
+    true
   end
 end

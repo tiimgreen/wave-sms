@@ -2,8 +2,12 @@
   <% @customers_sidebar.each do |customer| %>
     <li class="customer">
       <%= link_to customer do %>
-        <div class="name"><%= customer.name %></div>
-        <div class="number"><%= customer.phone_number %></div>
+        <% if customer.has_unseen_message? %>
+          <div class="pull-right">
+            <span class="label label-success">new</span>
+          </div>
+        <% end %>
+        <div class="name"><%= customer.phone_display_details %></div>
       <% end %>
     </li>
   <% end %>

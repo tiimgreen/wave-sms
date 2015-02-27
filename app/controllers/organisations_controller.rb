@@ -1,6 +1,6 @@
 class OrganisationsController < ApplicationController
-  before_action :authenticate_user!, except: :new_customer
-  before_action :authenticate_org_owner, only: :edit
+  before_action :authenticate_user!, except: [:new_customer, :create_new_customer]
+  before_action :authenticate_org_member, only: [:edit, :show]
   before_action :authenticate_has_phone_number, only: [:choose_phone_number, :activate_phone_number]
 
   def index
@@ -10,11 +10,11 @@ class OrganisationsController < ApplicationController
   end
 
   def edit
-    @org = Organisation.find(params[:id])
+    @org = Organisation.find_by(permalink: params[:id])
   end
 
   def update
-    @org = Organisation.find(params[:id])
+    @org = Organisation.find_by(permalink: params[:id])
 
     if @org.update_attributes(organisation_params)
       flash[:success] = 'Organisation updated'
@@ -25,7 +25,7 @@ class OrganisationsController < ApplicationController
   end
 
   def choose_phone_number
-    @org = Organisation.find(params[:organisation_id])
+    @org = Organisation.find_by(permalink: params[:id])
 
     if params[:area_code] == 'none'
       @numbers = client.available_phone_numbers.get('GB').local.list
@@ -48,26 +48,38 @@ class OrganisationsController < ApplicationController
 
   # Customer visits to sign up and save card details
   def new_customer
+    @org = Organisation.find_by(permalink: params[:id])
+    @customer = Customer.new
+
     Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
   end
 
   def create_new_customer
-    Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+    @org = Organisation.find_by(permalink: params[:id])
+    @customer = @org.customers.build(customer_params)
 
-    Stripe::Charge.create(
-      amount: 400,
-      currency: "gbp",
-      source: "tok_14mBggEonafcEKzyf3YVUkJw", # obtained with Stripe.js
-      description: "Charge for test@example.com"
-    )
+    if @customer.save
+      flash[:success] = "Your details have been saved with #{@org.name}!"
+      redirect_to root_path
+    else
+      render :new_customer
+    end
+
+    # Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+    # Stripe::Charge.create(
+    #   amount: 400,
+    #   currency: "gbp",
+    #   source: "tok_14mBggEonafcEKzyf3YVUkJw", # obtained with Stripe.js
+    #   description: "Charge for test@example.com"
+    # )
   end
 
   private
 
-    def authenticate_org_owner
-      org = Organisation.find(params[:id])
+    def authenticate_org_member
+      org = Organisation.find_by!(permalink: params[:id])
 
-      unless current_user == org.owner
+      unless current_user.organisation_id == org.id
         flash[:warning] = 'You need to be the organisation owner to do that.'
         redirect_to dashboard_path
       end
@@ -84,6 +96,14 @@ class OrganisationsController < ApplicationController
 
     def organisation_params
       params.require(:organisation).permit(:name, :area_code)
+    end
+
+    def customer_params
+      params.require(:customer).permit(:first_name, :last_name, :email,
+                                       :address_line_1, :address_line_2,
+                                       :address_line_3, :city, :postal_code,
+                                       :country, :wants_promotions,
+                                       :phone_number)
     end
 
     def client

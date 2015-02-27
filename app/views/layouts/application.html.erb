@@ -22,7 +22,13 @@
 
   <%= render 'layouts/header' %>
 
-  <%= yield %>
+  <div class="sidebar">
+  <%= render 'layouts/sidebar' %>
+  </div>
+
+  <div class="content">
+    <div class="info"><%= yield %></div>
+  </div>
 
   <%= render 'layouts/footer' %>
 

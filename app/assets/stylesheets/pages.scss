@@ -1,3 +1,46 @@
 // Place all the styles related to the Pages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sidebar {
+  position: fixed;
+  width: 200px;
+  height: 100%;
+  background: #34495e;
+
+  .customer-list {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      color: #ecf0f1;
+      width: 100%;
+      min-height: 50px;
+      padding: 10px 0 10px 10px;
+      border-bottom: 1px solid black;
+
+      .name {
+        color: #fff;
+        font-weight: bold;
+      }
+
+      .number {
+        color: #eee;
+      }
+    }
+  }
+}
+
+.content {
+  margin-left: 200px;
+  margin-top: 20px;
+  height: 500px;
+  width: auto;
+  position: relative;
+  overflow: auto;
+  z-index: 1;
+}
+
+.info {
+  width: 100%;
+}

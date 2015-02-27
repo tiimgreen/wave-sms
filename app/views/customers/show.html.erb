@@ -16,10 +16,17 @@
 
         <% end %>
 
+        <div class="info-block">
+          This user <strong><%= @customer.wants_promotions ? 'wants' : 'does not want' %></strong> to receive promotions.
+        </div>
+
         <% if @customer.is_taken? %>
           <div class="info-block">
-            Customer is assigned to:
-            <%= @customer.user.name.present? ? @customer.user.name : @customer.user.email %>
+            Customer is assigned to:<br>
+            <strong>
+              <%= @customer.user.name.present? ? @customer.user.name : @customer.user.email %>
+              <%= '(you)' if @customer.is_taken_by?(current_user) %>
+            </strong>
           </div>
         <% end %>
 

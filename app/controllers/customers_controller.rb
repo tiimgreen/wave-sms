@@ -1,4 +1,6 @@
 class CustomersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :customer_already_taken, only: :assign_customer
 
   def new
     @customer = Customer.new
@@ -10,7 +12,7 @@ class CustomersController < ApplicationController
     if @customer.save
       @customer.build_chat.save
       flash[:success] = 'Customer created'
-      redirect_to customer_path(@customer)
+      redirect_to @customer
     else
       render :new
     end
@@ -35,7 +37,7 @@ class CustomersController < ApplicationController
 
     if @customer.update_attributes(customer_params)
       flash[:success] = 'Customer updated'
-      redirect_to customer_path(@customer)
+      redirect_to @customer
     else
       render :edit
     end
@@ -73,6 +75,14 @@ class CustomersController < ApplicationController
       params.require(:customer).permit(:first_name, :last_name, :email,
                                        :address_line_1, :address_line_2,
                                        :address_line_3, :city, :postal_code,
-                                       :country, :wants_promotions)
+                                       :country, :wants_promotions,
+                                       :phone_number)
+    end
+
+    def customer_already_taken
+      if (customer = Customer.find(params[:customer_id])).staff_id.present?
+        flash[:warning] = "This customer is already taken, please wait for #{customer.user.name} to close them."
+        redirect_to customer
+      end
     end
 end

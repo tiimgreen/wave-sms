@@ -1,0 +1,10 @@
+<ul class="customer-list">
+  <% @customers_sidebar.each do |customer| %>
+    <li class="customer">
+      <%= link_to customer do %>
+        <div class="name"><%= customer.name %></div>
+        <div class="number"><%= customer.phone_number %></div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>

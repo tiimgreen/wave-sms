@@ -63,10 +63,10 @@ class ApplicationController < ActionController::Base
     end
 
     def set_customers
-      @customers_sidebar = current_org.customers
+      @customers_sidebar = current_org.customers.sort_by(&:last_name)
     end
 
     def render_404
-      raise ActionController::RoutingError.new('Not Found')
+      raise ActionController::RoutingError.new('Page Not Found')
     end
 end

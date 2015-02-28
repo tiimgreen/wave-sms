@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'pricing', to: 'pages#pricing'
   get 'about',   to: 'pages#about'
   get 'contact', to: 'pages#contact'
+  get 'pricing/custom-quote', to: 'pages#custom_quote'
 
   # Dashboard
   get 'dashboard', to: 'dashboard#index'

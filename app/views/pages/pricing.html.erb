@@ -91,9 +91,9 @@
           <p class="description">
             Get in touch with us to get a custom quote.
           </p>
-          <a class="btn-signup button-clear" href="<%= new_user_registration_path %>">
+          <%= link_to pricing_custom_quote_path, class: 'btn-signup button-clear' do %>
             <span>Start free trial</span>
-          </a>
+          <% end %>
         </div>
       </div>
     </div>

@@ -13,6 +13,9 @@ class PagesController < ApplicationController
   def contact
   end
 
+  def custom_quote
+  end
+
   private
 
     def dashboard_redirect

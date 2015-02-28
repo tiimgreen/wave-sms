@@ -2,6 +2,7 @@ class OrganisationsController < ApplicationController
   before_action :authenticate_user!, except: [:new_customer, :create_new_customer]
   before_action :authenticate_org_member, only: [:edit, :show]
   before_action :authenticate_has_phone_number, only: [:choose_phone_number, :activate_phone_number]
+  before_action :authenticate_org_exists
 
   def index
   end
@@ -83,6 +84,10 @@ class OrganisationsController < ApplicationController
         flash[:warning] = 'You need to be the organisation owner to do that.'
         redirect_to dashboard_path
       end
+    end
+
+    def authenticate_org_exists
+      render_404 unless Organisation.find_by(permalink: params[:organisation_id]).present?
     end
 
     def authenticate_has_phone_number

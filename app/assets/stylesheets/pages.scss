@@ -16,8 +16,14 @@
       color: #ecf0f1;
       width: 100%;
       min-height: 40px;
-      padding: 10px 0 10px 10px;
+      padding: 10px 0 10px 15px;
       border-bottom: 1px solid black;
+      transition: color 0.5s ease;
+
+      &:hover {
+        border-left: 5px solid #2980b9;
+        padding-left: 10px;
+      }
 
       .label {
         margin-right: 10px;
@@ -25,7 +31,10 @@
 
       .name {
         color: #fff;
-        font-weight: bold;
+
+        &:hover {
+          color: #c9c9c9;
+        }
       }
 
       .number {

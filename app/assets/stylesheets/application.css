@@ -1,6 +1,15 @@
 /*
- *= require theme.scss
- *= require octicons
  *= require_tree .
  *= require_self
+ *= require vendor/animate
+ *= require vendor/brankic
+ *= require vendor/entypo
+ *= require vendor/flexslider
+ *= require vendor/flipclock
+ *= require vendor/icomoon
+ *= require vendor/ionicons.min
+ *= require vendor/isotope
+ *= require vendor/spectrum
+ *= require theme.scss
+ *= require octicons
  */

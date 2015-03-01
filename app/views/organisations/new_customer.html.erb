@@ -1,1 +1,75 @@
-<%= @org.taken_names %>
+<%= form_for @customer, url: organisation_create_customer_path do |f| %>
+  <div class="row">
+    <div class="col-md-12">
+      <%= render 'shared/error_messages', object: f.object %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, autofocus: true, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <% if @customer.is_taken? %>
+        <div class="alert alert-warning" role="alert">
+          This user is currently active and assigned to <%= @customer.is_taken_by?(current_user) ? 'you' : @customer.user.name %>. Please wait until the customer is closed to change the phone number.
+        </div>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :phone_number %>
+      <%= f.text_field :phone_number, class: 'form-control', disabled: @customer.is_taken? %>
+    </div>
+    <div class="form-group">
+      <%= f.label :address_line_1, 'Address Line 1' %>
+      <%= f.text_field :address_line_1, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :address_line_2, 'Address Line 2' %>
+      <%= f.text_field :address_line_2, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :address_line_3, 'Address Line 3' %>
+      <%= f.text_field :address_line_3, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :city %>
+      <%= f.text_field :city, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :postal_code %>
+      <%= f.text_field :postal_code, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :country %>
+      <%= f.text_field :country, class: 'form-control' %>
+    </div>
+
+    <div class="checkbox center">
+      <%= f.label :wants_promotions, class: 'center' do %>
+        <%= f.check_box :wants_promotions %>
+        I want to receive SMS promotions from <%= @org.name %>.
+      <% end %>
+      <div class="submit center">
+        <%= f.submit 'Create', class: 'button' %>
+      </div>
+    </div>
+  </div>
+<% end %>

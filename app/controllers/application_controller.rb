@@ -36,19 +36,22 @@ class ApplicationController < ActionController::Base
       if devise_controller? || form_layout?
         'devise'
       elsif params[:controller] == 'pages'
-        'application_no_sidebar'
+        'pages'
       else
         'application'
       end
     end
 
+    # Determines if a non-devise page should use the form layout
     def form_layout?
-      prettify_controller_forms('organisations') ||
-      prettify_controller_forms('customers') ||
-      params[:controller] == 'organisations' && params[:action] == 'new_customer'
+      form_actions_for('organisations') ||
+      form_actions_for('customers') ||
+      (params[:controller] == 'organisations' &&
+        (params[:action] == 'new_customer' || params[:action] == 'create_new_customer'))
     end
 
-    def prettify_controller_forms(cont)
+    # Returns all actions where a form is present for a controller
+    def form_actions_for(cont)
       params[:controller] == cont &&
       (params[:action] == 'new' || params[:action] == 'create' ||
         params[:action] == 'edit' || params[:action] == 'update')

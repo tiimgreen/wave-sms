@@ -4,9 +4,12 @@ class Customer < ActiveRecord::Base
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 
   validates :first_name,   presence: true, length: { maximum: 50 }
+  validates :last_name,    presence: true, length: { maximum: 50 }
   validates :last_name,    length: { maximum: 50 }
+  validates :email,        presence: true
   validates :email,        format: { with: VALID_EMAIL_REGEX },
-                           uniqueness: { case_sensitive: false }
+                           uniqueness: { case_sensitive: false },
+                           unless: Proc.new { |c| c.email.blank? }
   validates :phone_number, presence: true, length: { maximum: 20 }
 
   has_one :chat

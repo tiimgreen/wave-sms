@@ -49,19 +49,19 @@ class OrganisationsController < ApplicationController
 
   # Customer visits to sign up and save card details
   def new_customer
-    @org = Organisation.find_by(permalink: params[:id])
+    @org = Organisation.find_by(permalink: params[:organisation_id])
     @customer = Customer.new
 
     Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
   end
 
   def create_new_customer
-    @org = Organisation.find_by(permalink: params[:id])
+    @org = Organisation.find_by(permalink: params[:organisation_id])
     @customer = @org.customers.build(customer_params)
 
     if @customer.save
       flash[:success] = "Your details have been saved with #{@org.name}!"
-      redirect_to root_path
+      redirect_to organisation_after_signup_path
     else
       render :new_customer
     end
@@ -73,6 +73,9 @@ class OrganisationsController < ApplicationController
     #   source: "tok_14mBggEonafcEKzyf3YVUkJw", # obtained with Stripe.js
     #   description: "Charge for test@example.com"
     # )
+  end
+
+  def after_customer_signup
   end
 
   private
@@ -87,7 +90,8 @@ class OrganisationsController < ApplicationController
     end
 
     def authenticate_org_exists
-      render_404 unless Organisation.find_by(permalink: params[:organisation_id]).present?
+      permalink = params[:id].present? ? params[:id] : params[:organisation_id]
+      render_404 unless Organisation.find_by(permalink: permalink).present?
     end
 
     def authenticate_has_phone_number

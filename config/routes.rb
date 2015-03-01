@@ -37,6 +37,7 @@ Rails.application.routes.draw do
 
   # Needs to be defined last to ensure all other roots take presendence
   get ':organisation_id', to: 'organisations#show', as: :organisation
-  get ':organisation_id/signup', to: 'organisations#new_customer',          as: :organisation_new_customer
-  match ':organisation_id/signup', to: 'organisations#create_new_customer', via: :post
+  get ':organisation_id/signup',   to: 'organisations#new_customer',          as: :organisation_new_customer
+  match ':organisation_id/signup', to: 'organisations#create_new_customer',   as: :organisation_create_customer, via: :post
+  get ':organisation_id/thanks',   to: 'organisations#after_customer_signup', as: :organisation_after_signup
 end

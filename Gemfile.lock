@@ -97,6 +97,7 @@ GEM
       railties (>= 3.2, < 5.0)
     orm_adapter (0.5.0)
     pg (0.18.1)
+    phone (1.2.3)
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -195,6 +196,7 @@ DEPENDENCIES
   jquery-ui-rails (~> 4.2.0)
   octicons-rails
   pg
+  phone
   rails (= 4.2.0)
   rails_12factor
   sass-rails (~> 5.0)

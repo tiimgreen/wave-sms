@@ -11,6 +11,7 @@ gem 'octicons-rails'
 gem 'twilio-ruby', '~> 3.15.1'
 gem 'dotenv-rails', groups: [:development, :test]
 gem 'stripe', '~> 1.20.0'
+gem 'phone'
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails', '~> 4.2.0'

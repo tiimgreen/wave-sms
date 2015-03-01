@@ -17,7 +17,12 @@
         <% end %>
 
         <div class="info-block">
-          This user <strong><%= @customer.wants_promotions ? 'wants' : 'does not want' %></strong> to receive promotions.
+          <% if @customer.wants_promotions %>
+            <span class="glyphicon glyphicon-ok yes"></span>
+          <% else %>
+            <span class="glyphicon glyphicon-remove no"></span>
+          <% end %>
+          Promotions
         </div>
 
         <% if @customer.is_taken? %>

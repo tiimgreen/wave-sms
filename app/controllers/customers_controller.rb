@@ -27,6 +27,7 @@ class CustomersController < ApplicationController
   end
 
   def index
+    @page_title = 'Your Customers'
     @customers = current_org.customers
   end
 

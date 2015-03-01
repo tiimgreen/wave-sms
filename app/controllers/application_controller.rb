@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   include ApplicationHelper
   include TwilioHelper
+  include CustomerHelper
 
   layout :layout_by_resource
 

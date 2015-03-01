@@ -8,7 +8,7 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = current_org.customers.build(customer_params)
+    @customer = current_org.customers.build(parse_phone_number_in_params(customer_params))
 
     if @customer.save
       @customer.build_chat.save

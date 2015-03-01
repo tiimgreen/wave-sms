@@ -1,0 +1,67 @@
+<div id="footer-white">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3 menu">
+        <h3>Overview</h3>
+        <ul>
+          <li>
+            <%= link_to 'Services', '#' %>
+          </li>
+          <li>
+            <%= link_to 'Pricing', pricing_path %>
+          </li>
+          <li>
+            <%= link_to 'Support', '#' %>
+          </li>
+          <li>
+            <%= link_to 'Blog', '#' %>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-3 menu">
+        <h3>Menu</h3>
+        <ul>
+          <li>
+            <%= link_to 'About us', about_path %>
+          </li>
+          <li>
+            <%= link_to 'Contact us', contact_path %>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-2 menu">
+        <h3>Social</h3>
+        <ul>
+          <li>
+            <%= link_to 'Facebook', '#' %>
+          </li>
+          <li>
+            <%= link_to 'Twitter', 'http://twitter.com/wavesms' %>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-4 newsletter">
+        <div class="signup clearfix">
+          <p>
+            Sign up for the newsletter and we'll inform you of updates, offers and more.
+          </p>
+          <form>
+            <input class="form-control" name="email" placeholder="Your email address" type="text">
+            <input type="submit" value="Sign up">
+          </form>
+        </div>
+        <%= link_to '#' do %>
+          <%= image_tag 'social/fb.png' %>
+        <% end %>
+        <%= link_to 'http://twitter.com/wavesms' do %>
+          <%= image_tag 'social/social-tw.png' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row credits">
+      <div class="col-md-12">
+        Copyright &copy; <%= Time.now.year %>, Wave SMS.
+      </div>
+    </div>
+  </div>
+</div>

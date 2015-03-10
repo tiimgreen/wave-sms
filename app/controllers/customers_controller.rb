@@ -55,7 +55,7 @@ class CustomersController < ApplicationController
     @user = User.find(params[:user_id])
 
     if @customer.update_attributes(staff_id: @user.id, time_of_assignment: Time.now)
-      flash[:success] = 'User assigned to you.'
+      flash[:success] = 'Customer assigned to you.'
       redirect_to @customer
     else
       flash[:warning] = 'Error assigning you to that customer.'

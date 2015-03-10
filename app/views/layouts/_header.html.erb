@@ -1,5 +1,5 @@
 <header class="<%= header_class %>" role="banner">
-  <div class="soft-sides-20">
+  <div class="<% if user_signed_in? %>soft-sides-20<% else %>container<% end %>">
     <div class="navbar-header">
       <button class="navbar-toggle" data-target=".bs-navbar-collapse" data-toggle="collapse" type="button">
         <span class="icon-bar"></span>

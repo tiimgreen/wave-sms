@@ -10,7 +10,8 @@ class Customer < ActiveRecord::Base
   validates :email,        format: { with: VALID_EMAIL_REGEX },
                            uniqueness: { case_sensitive: false },
                            unless: Proc.new { |c| c.email.blank? }
-  validates :phone_number, presence: true, length: { maximum: 20 }
+  validates :phone_number, presence: true, on: :create
+  validates :phone_number, length: { maximum: 20 }
 
   has_one :chat
   has_many :messages, as: :sender

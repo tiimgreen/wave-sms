@@ -17,3 +17,15 @@
     }
   }
 }
+
+.stats {
+  margin-left: 20px;
+
+  .stat {
+    margin: 0 10px;
+
+    &:first-child {
+      margin-left:0;
+    }
+  }
+}

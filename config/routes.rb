@@ -17,7 +17,10 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#index'
 
   # Organisation
-  resources :organisations, only: %w( edit ) do
+  get 'my-account',         to: 'organisations#edit',    as: :edit_organisation
+  get 'my-account/upgrade', to: 'organisations#upgrade', as: :upgrade_organisation
+
+  namespace :organisations do
     get 'choose_phone_number', path: 'choose-phone-number'
     match 'activate_phone_number', path: 'activate-phone-number', via: :post
   end

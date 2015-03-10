@@ -10,8 +10,11 @@ class OrganisationsController < ApplicationController
   def show
   end
 
+  def upgrade
+    @page_title = 'Upgrade Account'
+  end
+
   def edit
-    @org = Organisation.find_by(permalink: params[:id])
   end
 
   def update
@@ -83,7 +86,7 @@ class OrganisationsController < ApplicationController
   private
 
     def authenticate_org_member
-      org = Organisation.find_by!(permalink: params[:id])
+      org = Organisation.find_by(permalink: params[:id]) || current_org
 
       unless current_user.organisation_id == org.id
         flash[:warning] = 'You need to be the organisation owner to do that.'
@@ -92,8 +95,10 @@ class OrganisationsController < ApplicationController
     end
 
     def authenticate_org_exists
-      permalink = params[:id].present? ? params[:id] : params[:organisation_id]
-      render_404 unless Organisation.find_by(permalink: permalink).present?
+      unless current_org.present?
+        permalink = params[:id].present? ? params[:id] : params[:organisation_id]
+        render_404 unless Organisation.find_by(permalink: permalink).present?
+      end
     end
 
     def authenticate_has_phone_number

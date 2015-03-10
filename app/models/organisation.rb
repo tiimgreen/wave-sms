@@ -5,13 +5,18 @@ class Organisation < ActiveRecord::Base
 
   validate :name_cannot_be_reserved_word
 
-  validates :permalink, presence: true, uniqueness: { case_sensitive: false }
-  validates :name,      presence: true
+  validates :permalink,   presence: true, uniqueness: { case_sensitive: false }
+  validates :name,        presence: true
+  validates :staff_limit, presence: true
 
   before_save :save_permalink
 
   def to_param
     name.parameterize
+  end
+
+  def staff
+    users
   end
 
   def taken_names

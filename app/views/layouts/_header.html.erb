@@ -32,7 +32,7 @@
               </li>
               <% if current_user.organisation.owner == current_user %>
                 <li>
-                  <%= link_to edit_organisation_path(current_user.organisation) do %>
+                  <%= link_to edit_organisation_path do %>
                     <i class="fa fa-pencil fa-fw"></i>
                     Organisation Settings
                   <% end %>

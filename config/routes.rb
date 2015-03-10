@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     get 'close_customer', path: 'close'
   end
 
+  resources :staff
+
   # Path for Twilio
   match 'get-sms', to: 'messages#get_sms', via: :post
 

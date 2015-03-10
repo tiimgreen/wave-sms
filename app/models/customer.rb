@@ -41,6 +41,6 @@ class Customer < ActiveRecord::Base
   end
 
   def has_unseen_message?
-    true
+    !is_taken?
   end
 end

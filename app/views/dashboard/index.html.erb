@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
+        <%= render 'shared/flash' %>
         <% if current_user.owner?(current_org) && current_org.phone_number.blank? %>
           <div class="alert alert-info alert-dismissible" role="alert">
             <button class="close" data-dismiss="alert" type="button">

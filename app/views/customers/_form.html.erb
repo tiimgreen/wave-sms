@@ -1,4 +1,16 @@
+<%= render 'shared/flash' %>
+
 <%= form_for @customer do |f| %>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %> alert-dissmissable alert-form" role="alert">
+      <button class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <%= value %>
+    </div>
+  <% end %>
+
   <div class="row">
     <div class="col-md-12">
       <%= render 'shared/error_messages', object: f.object %>
@@ -53,7 +65,7 @@
     </div>
 
     <div class="form-group">
-      <%= f.label :postal_code %>
+      <%= f.label :postal_code, 'ZIP/Postal Code' %>
       <%= f.text_field :postal_code, class: 'form-control' %>
     </div>
 

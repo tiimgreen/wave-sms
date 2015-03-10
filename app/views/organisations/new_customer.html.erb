@@ -1,9 +1,20 @@
 <%= form_for @customer, url: organisation_create_customer_path do |f| %>
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %> alert-dissmissable alert-form" role="alert">
+      <button class="close" data-dismiss="alert" type="button">
+        <span aria-hidden="true">&times;</span>
+        <span class="sr-only">Close</span>
+      </button>
+      <%= value %>
+    </div>
+  <% end %>
+
   <div class="row">
     <div class="col-md-12">
       <%= render 'shared/error_messages', object: f.object %>
     </div>
   </div>
+
   <div class="row">
     <div class="form-group">
       <%= f.label :first_name %>

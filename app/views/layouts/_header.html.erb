@@ -1,5 +1,5 @@
 <header class="<%= header_class %>" role="banner">
-  <div class="container">
+  <div class="soft-sides-20">
     <div class="navbar-header">
       <button class="navbar-toggle" data-target=".bs-navbar-collapse" data-toggle="collapse" type="button">
         <span class="icon-bar"></span>
@@ -15,6 +15,7 @@
     <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
+          <li><%= link_to 'New Promotion', '#' %></li>
           <li><%= link_to 'Customers', customers_path %></li>
           <li><%= link_to 'Staff', staff_index_path %></li>
           <li class="dropdown">

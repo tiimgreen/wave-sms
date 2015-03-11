@@ -1,14 +1,16 @@
 class CustomersController < ApplicationController
   before_action :authenticate_user!
   before_action :customer_already_taken, only: :assign_customer
-  before_action :customer_belongs_to_organisation, only: [:show, :edit, :update]
+  before_action :customer_belongs_to_organisation, only: %i( show edit update )
 
   def new
     @customer = Customer.new
   end
 
   def create
-    @customer = current_org.customers.build(parse_phone_number_in_params(customer_params))
+    @customer = current_org.customers.build(
+      parse_phone_number_in_params(customer_params)
+    )
 
     if @customer.save
       @customer.build_chat.save
@@ -54,7 +56,8 @@ class CustomersController < ApplicationController
     @customer = Customer.find(params[:customer_id])
     @user = User.find(params[:user_id])
 
-    if @customer.update_attributes(staff_id: @user.id, time_of_assignment: Time.now)
+    if @customer.update_attributes(staff_id: @user.id,
+                                   time_of_assignment: Time.now)
       flash[:success] = 'Customer assigned to you.'
       redirect_to @customer
     else

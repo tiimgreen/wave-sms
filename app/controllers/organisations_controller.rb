@@ -102,7 +102,7 @@ class OrganisationsController < ApplicationController
     end
 
     def authenticate_has_phone_number
-      org = Organisation.find(params[:organisation_id])
+      org = Organisation.find(current_org)
 
       if org.phone_number.present?
         flash[:warning] = 'You already have a phone number.'

@@ -8,7 +8,12 @@
 
         <% if @numbers.present? %>
 
-          <%= form_tag organisation_activate_phone_number_path do %>
+          <div class="alert alert-info" role="alert">
+            Don't see a number you like?
+            <%= link_to 'Refresh.', url_for(params), class: 'alert-link' %>
+          </div>
+
+          <%= form_tag organisations_activate_phone_number_path do %>
 
             <% @numbers.each_with_index do |num, i| %>
               <label for="number_<%= i %>">

@@ -40,11 +40,9 @@ class OrganisationsController < ApplicationController
   end
 
   def activate_phone_number
-    org = Organisation.find(params[:organisation_id])
-
     client.incoming_phone_numbers.create(phone_number: params[:phone_number])
 
-    if org.update_attributes(phone_number: params[:phone_number])
+    if current_org.update_attributes(phone_number: params[:phone_number])
       flash[:success] = 'Phone number activated!'
       redirect_to dashboard_path
     end

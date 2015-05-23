@@ -64,6 +64,15 @@
         <% else %>
           <p class="center">This customer has not sent any messages yet.</p>
         <% end %>
+        <div class="reply">
+          <%= form_tag '' do %>
+            <textarea class="form-control" rows="7" name="message_body" id="message_body" placeholder="Type your reply..."></textarea>
+
+            <div class="">
+              <%= submit_tag 'Send', class: 'btn btn-primary pull-right hard-top-10' %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

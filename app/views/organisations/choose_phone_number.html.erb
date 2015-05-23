@@ -8,22 +8,28 @@
 
         <% if @numbers.present? %>
 
-          <div class="alert alert-info" role="alert">
-            Don't see a number you like?
-            <%= link_to 'Refresh.', url_for(params), class: 'alert-link' %>
-          </div>
+          <div class="row hard-top-20">
 
-          <%= form_tag organisations_activate_phone_number_path do %>
+            <%= form_tag organisations_activate_phone_number_path do %>
 
-            <% @numbers.each_with_index do |num, i| %>
-              <label for="number_<%= i %>">
-                <input type="radio" value="<%= num.phone_number %>" name="phone_number" id="number_<%= i %>">
-                <%= format_number(num.phone_number, params[:area_code] || current_org.area_code) %>
-              </label><br>
+              <% @numbers.each_slice(10) do |numbers| %>
+
+                <% numbers.each_with_index do |number, i| %>
+                  <div class="col-md-4">
+
+                    <label for="<%= number.phone_number %>" class="phone-number">
+                      <input type="radio" value="<%= number.phone_number %>" name="phone_number" id="<%= number.phone_number %>">
+                      <%= format_number(number.phone_number, params[:area_code] || current_org.area_code) %>
+                    </label><br>
+                  </div>
+                <% end %>
+              <% end %>
+
+              <div class="center">
+                <%= submit_tag 'Activate Number', class: 'button hard-top-20' %>
+              </div>
             <% end %>
-
-            <%= submit_tag 'Activate', class: 'button' %>
-          <% end %>
+          </div>
         <% else %>
           <p class="center soft-top-20">
             There are no numbers available with your area code, either <%= link_to 'change your area code', edit_organisation_path(current_org) %> or <%= link_to 'look at randomly generated numbers', organisation_choose_phone_number_path(current_org, area_code: 'none') %>.

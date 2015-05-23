@@ -78,6 +78,14 @@ class CustomersController < ApplicationController
     end
   end
 
+  def send_message
+    client.messages.create(
+      from: current_org.phone_number,
+      to: '+16105557069',
+      body: 'Hey there!'
+    )
+  end
+
   private
 
     def customer_params
@@ -99,5 +107,9 @@ class CustomersController < ApplicationController
       unless Customer.find(params[:id]).organisation_id == current_org.id
         render_404
       end
+    end
+
+    def client
+      Twilio::REST::Client.new(ENV["TWILIO_ACCOUNT_SID"], ENV["TWILIO_AUTH_TOKEN"])
     end
 end

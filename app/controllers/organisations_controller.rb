@@ -2,12 +2,18 @@ class OrganisationsController < ApplicationController
   before_action :authenticate_user!, except: %i( new_customer create_new_customer )
   before_action :authenticate_org_member, only: %i( edit show )
   before_action :authenticate_has_phone_number, only: %i( choose_phone_number activate_phone_number )
+  before_action :authenticate_has_area_code, only: %i( choose_phone_number )
   before_action :authenticate_org_exists
 
   def index
   end
 
   def show
+    begin
+      Organisation.find(params[:organisation_id])
+    rescue ActiveRecord::RecordNotFound
+      render_404
+    end
   end
 
   def upgrade
@@ -29,14 +35,8 @@ class OrganisationsController < ApplicationController
   end
 
   def choose_phone_number
-    @org = Organisation.find_by(permalink: params[:id])
-
-    if params[:area_code] == 'none'
-      @numbers = client.available_phone_numbers.get('GB').local.list
-    else
-      area_code = twilio_area_code(current_user.organisation.area_code)
-      @numbers = client.available_phone_numbers.get('GB').local.list(contains: area_code)
-    end
+    area_code = twilio_area_code(current_org.area_code)
+    @numbers = client.available_phone_numbers.get('GB').local.list(contains: area_code)
   end
 
   def activate_phone_number
@@ -100,11 +100,16 @@ class OrganisationsController < ApplicationController
     end
 
     def authenticate_has_phone_number
-      org = Organisation.find(current_org)
-
-      if org.phone_number.present?
+      if current_org.phone_number.present?
         flash[:warning] = 'You already have a phone number.'
         redirect_to dashboard_path
+      end
+    end
+
+    def authenticate_has_area_code
+      if current_org.area_code.blank?
+        flash[:warning] = 'You have not set an area code. Please set one here.'
+        redirect_to edit_organisation_path
       end
     end
 

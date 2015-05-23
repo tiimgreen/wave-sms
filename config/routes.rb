@@ -27,8 +27,8 @@ Rails.application.routes.draw do
 
   # Declared here so the path name organisation is not auto-created in the
   # resources block as it is needed for later
-  match '/organisations/:id', to: 'organisations#update', via: :put
-  match '/organisations/:id', to: 'organisations#update', via: :patch
+  match '/:id', to: 'organisations#update', via: :put
+  match '/:id', to: 'organisations#update', via: :patch
 
   resources :customers do
     get 'assign_customer', path: 'assign-to/:user_id'

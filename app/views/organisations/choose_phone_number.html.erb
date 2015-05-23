@@ -19,7 +19,7 @@
 
                     <label for="<%= number.phone_number %>" class="phone-number">
                       <input type="radio" value="<%= number.phone_number %>" name="phone_number" id="<%= number.phone_number %>">
-                      <%= format_number(number.phone_number, params[:area_code] || current_org.area_code) %>
+                      <%= format_number(number.phone_number, current_org.area_code) %>
                     </label><br>
                   </div>
                 <% end %>

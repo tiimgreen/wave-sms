@@ -6,7 +6,8 @@
         <h3><%= @customer.name %></h3>
         <p><%= @customer.email %></p>
 
-        <% if @customer.address_fields.present? %>
+        <%= @customer.address_fields %>
+        <% if !@customer.address_fields.empty? %>
 
           <div class="info-block">
             <h5>Address</h5>
@@ -18,12 +19,14 @@
         <% end %>
 
         <div class="info-block">
-          <% if @customer.wants_promotions %>
-            <span class="glyphicon glyphicon-ok yes"></span>
-          <% else %>
-            <span class="glyphicon glyphicon-remove no"></span>
+          <% if @customer.wants_promotions.present? %>
+            <% if @customer.wants_promotions %>
+              <span class="glyphicon glyphicon-ok yes"></span>
+            <% else %>
+              <span class="glyphicon glyphicon-remove no"></span>
+            <% end %>
+            Promotions
           <% end %>
-          Promotions
         </div>
 
         <% if @customer.is_taken? %>
@@ -69,7 +72,15 @@
         <% end %>
         <div class="reply">
           <%= form_tag '' do %>
-            <textarea class="form-control" rows="7" name="message_body" id="message_body" placeholder="Type your reply..."></textarea>
+            <% if @customer.is_taken? %>
+              <% if @customer.is_taken_by?(current_user) %>
+                <textarea class="form-control" rows="7" name="message_body" id="message_body" placeholder="Type your reply..."></textarea>
+              <% else %>
+                <textarea class="form-control" rows="7" name="message_body" id="message_body" disabled="disabled" placeholder="This customer is assigned to <%= customer.user.name %>..."></textarea>
+              <% end %>
+            <% else %>
+              <textarea class="form-control" rows="7" name="message_body" id="message_body" disabled="disabled" placeholder="To reply, assign the customer to you..."></textarea>
+            <% end %>
 
             <div class="">
               <%= submit_tag 'Send', class: 'btn btn-primary pull-right hard-top-10' %>

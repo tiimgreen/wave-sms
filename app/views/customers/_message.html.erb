@@ -1,16 +1,17 @@
-  <div class="media">
+<div class="media message-container">
+  <% if message.from_staff? %>
+    <div class="media-body text-float-right">
+      <%= message.body %>
+    </div>
+    <div class="media-right">
+      <%= gravatar_for(message.sender) %>
+    </div>
+  <% else %>
     <div class="media-left">
-      <% if message.from_staff? %>
-        <%= link_to '#' do %>
-          <%= gravatar_for(message.sender) %>
-        <% end %>
-      <% else %>
-        <%= link_to '#' do %>
-          <%= gravatar_for(message.sender) %>
-        <% end %>
-      <% end %>
+      <%= gravatar_for(message.sender) %>
     </div>
     <div class="media-body">
       <%= message.body %>
     </div>
-  </div>
+  <% end %>
+</div>

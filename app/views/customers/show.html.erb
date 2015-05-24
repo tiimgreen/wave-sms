@@ -6,7 +6,7 @@
         <h3><%= @customer.name %></h3>
         <p><%= @customer.email %></p>
 
-        <% if @customer.address_line_1.present? %>
+        <% if @customer.address_fields.present? %>
 
           <div class="info-block">
             <h5>Address</h5>
@@ -61,6 +61,9 @@
         <h3 class="center">Messages</h3>
 
         <% if @customer.chat.messages.any? %>
+          <% @customer.chat.messages.each do |message| %>
+            <%= render 'customers/message', message: message %>
+          <% end %>
         <% else %>
           <p class="center">This customer has not sent any messages yet.</p>
         <% end %>

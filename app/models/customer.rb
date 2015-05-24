@@ -38,7 +38,7 @@ class Customer < ActiveRecord::Base
   end
 
   def is_taken_by?(other_user)
-    user == other_user
+    staff_id.present? && user == other_user
   end
 
   def has_unseen_message?

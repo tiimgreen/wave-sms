@@ -1,6 +1,7 @@
 class Organisation < ActiveRecord::Base
   has_many :users
   has_many :customers, dependent: :destroy
+  has_many :chats
   has_one :owner, class_name: 'User'
 
   validate :name_cannot_be_reserved_word

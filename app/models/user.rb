@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
 
   belongs_to :organisation
 
-  has_many :chats
   has_many :messages, as: :sender
 
   def owner?(org)

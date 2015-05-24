@@ -35,8 +35,12 @@
 }
 
 
-.message-container {
+.message-list {
+  overflow-y: scroll;
+  height: 90%;
 
-  border-top: 1px solid #eee;
-  padding-top: 10px;
+  .message-container {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+  }
 }

@@ -2,65 +2,65 @@
   <div class="container">
     <div class="row">
       <%= render 'shared/flash' %>
-      <div class="col-md-4 user-info center">
-        <h3><%= @customer.name %></h3>
-        <p><%= @customer.email %></p>
+      <div class="col-md-4 center">
+        <div class="user-info">
+          <h3><%= @customer.name %></h3>
+          <p><%= @customer.email %></p>
 
-        <%= @customer.address_fields %>
-        <% if !@customer.address_fields.empty? %>
+          <% if !@customer.address_field_values.all?(&:nil?) %>
 
-          <div class="info-block">
-            <h5>Address</h5>
-            <% @customer.address_fields.each do |field| %>
-              <span class="address-line"><%= @customer[field] %></span>
-            <% end %>
-          </div>
-
-        <% end %>
-
-        <div class="info-block">
-          <% if @customer.wants_promotions.present? %>
-            <% if @customer.wants_promotions %>
-              <span class="glyphicon glyphicon-ok yes"></span>
-            <% else %>
-              <span class="glyphicon glyphicon-remove no"></span>
-            <% end %>
-            Promotions
-          <% end %>
-        </div>
-
-        <% if @customer.is_taken? %>
-          <div class="info-block">
-            Customer is assigned to:<br>
-            <strong>
-              <%= @customer.user.name.present? ? @customer.user.name : @customer.user.email %>
-              <%= '(you)' if @customer.is_taken_by?(current_user) %>
-            </strong>
-          </div>
-        <% end %>
-
-        <div class="info-block">
-          <div class="btn-group">
-            <% if @customer.is_taken_by?(current_user) %>
-              <%= link_to 'Close Customer', customer_close_customer_path(@customer), class: 'btn btn-danger' %>
-            <% else %>
-              <%= link_to 'Assign Customer to Me', customer_assign_customer_path(@customer, current_user), class: 'btn btn-primary' %>
-            <% end %>
-
-            <% if @customer.is_taken? %>
-              <% if @customer.is_taken_by?(current_user) %>
-                <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default' %>
-              <% else %>
-                <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default', disabled: true %>
+            <div class="info-block">
+              <h5>Address</h5>
+              <% @customer.address_field_values.each do |address_line| %>
+                <span class="address-line"><%= address_line %></span>
               <% end %>
-            <% else %>
-              <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default' %>
+            </div>
+          <% end %>
+
+          <div class="info-block">
+            <% if @customer.wants_promotions.present? %>
+              <% if @customer.wants_promotions %>
+                <span class="glyphicon glyphicon-ok yes"></span>
+              <% else %>
+                <span class="glyphicon glyphicon-remove no"></span>
+              <% end %>
+              Promotions
             <% end %>
+          </div>
+
+          <% if @customer.is_taken? %>
+            <div class="info-block">
+              Customer is assigned to:<br>
+              <strong>
+                <%= @customer.user.name.present? ? @customer.user.name : @customer.user.email %>
+                <%= '(you)' if @customer.is_taken_by?(current_user) %>
+              </strong>
+            </div>
+          <% end %>
+
+          <div class="info-block">
+            <div class="btn-group">
+              <% if @customer.is_taken_by?(current_user) %>
+                <%= link_to 'Close Customer', customer_close_customer_path(@customer), class: 'btn btn-danger' %>
+              <% else %>
+                <%= link_to 'Assign Customer to Me', customer_assign_customer_path(@customer, current_user), class: 'btn btn-primary' %>
+              <% end %>
+
+              <% if @customer.is_taken? %>
+                <% if @customer.is_taken_by?(current_user) %>
+                  <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default' %>
+                <% else %>
+                  <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default', disabled: true %>
+                <% end %>
+              <% else %>
+                <%= link_to 'Edit', edit_customer_path(@customer), class: 'btn btn-default' %>
+              <% end %>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="col-md-8">
+      <div class="col-md-8 message-list">
         <h3 class="center">Messages</h3>
 
         <% if @customer.chat.messages.any? %>

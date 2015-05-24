@@ -32,6 +32,12 @@ class Customer < ActiveRecord::Base
     %i( address_line_1 address_line_2 address_line_3 city postal_code country )
   end
 
+  def address_field_values
+    vals = []
+    self.address_fields.each { |field| vals << self[field] }
+    vals
+  end
+
   def is_taken?
     staff_id.present?
   end

@@ -50,7 +50,7 @@
   height: 500px;
   width: auto;
   position: relative;
-  overflow: auto;
+  overflow: scroll;
   z-index: 1;
 }
 
@@ -61,3 +61,5 @@
 .pricing-header {
   margin-top: 100px;
 }
+
+body {overflow:hidden}

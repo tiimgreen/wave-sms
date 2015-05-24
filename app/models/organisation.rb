@@ -10,7 +10,7 @@ class Organisation < ActiveRecord::Base
   validates :name,        presence: true
   validates :staff_limit, presence: true
 
-  before_save :save_permalink
+  before_validation :save_permalink
 
   def to_param
     name.parameterize
@@ -20,6 +20,7 @@ class Organisation < ActiveRecord::Base
     users
   end
 
+  # Compiles list of taken URLs from routes
   def taken_names
     taken_routes = []
 
@@ -38,6 +39,6 @@ class Organisation < ActiveRecord::Base
   private
 
     def save_permalink
-      permalink = name.parameterize
+      self.permalink = name.parameterize
     end
 end

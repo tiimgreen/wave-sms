@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
 
   has_many :messages, as: :sender
 
+  validates :organisation_id, presence: true
+
   def owner?(org)
     org.owner == self
   end

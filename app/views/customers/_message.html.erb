@@ -1,14 +1,16 @@
-<% if message.from_staff? %>
   <div class="media">
     <div class="media-left">
-      <%= link_to '#' do %>
-        <%= gravatar_for(message.sender) %>
+      <% if message.from_staff? %>
+        <%= link_to '#' do %>
+          <%= gravatar_for(message.sender) %>
+        <% end %>
+      <% else %>
+        <%= link_to '#' do %>
+          <%= gravatar_for(message.sender) %>
+        <% end %>
       <% end %>
     </div>
     <div class="media-body">
-      <h4 class="media-heading" id="media-heading">Media heading<a class="anchorjs-link" href="#media-heading"><span class="anchorjs-icon"></span></a></h4>
-      Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+      <%= message.body %>
     </div>
   </div>
-<% else %>
-<% end %>
